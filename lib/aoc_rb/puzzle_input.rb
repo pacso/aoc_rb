@@ -9,14 +9,15 @@ module AocRb
       File.read(file_path)
     end
 
-    def create_required_directories(year)
-      year_directory = File.join(ENV['AOC_INPUT_DIRECTORY'], year.to_s)
+    def create_required_directories(year, day)
+      padded_day = day.to_s.rjust(2, "0")
+      year_directory = File.join("challenges", year.to_s, padded_day)
       FileUtils.mkdir_p(year_directory) unless Dir.exists?(year_directory)
     end
 
     def puzzle_path(year, day)
       padded_day = day.to_s.rjust(2, "0")
-      File.join(ENV['AOC_INPUT_DIRECTORY'], year.to_s, "day-#{padded_day}")
+      File.join("challenges", year.to_s, padded_day, "input.txt")
     end
 
     def download(year, day)
@@ -27,7 +28,7 @@ module AocRb
 
     def save_puzzle(year, day, content)
       protect_against_early_download(content)
-      create_required_directories year
+      create_required_directories year, day
       skip_if_exists(puzzle_path(year, day)) do
         File.open(puzzle_path(year, day), "w") { |f| f.write content }
       end

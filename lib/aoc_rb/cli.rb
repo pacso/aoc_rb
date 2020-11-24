@@ -11,6 +11,14 @@ require "aoc_rb/aoc_api"
 
 module AocRb
   class Cli < Thor
+    desc "get", "Downloads the input file and problem statement for today, or an optionally specified year / day"
+    method_option :year, aliases: "-y", type: :numeric, required: false, default: Time.now.year
+    method_option :day, aliases: "-d", type: :numeric, required: false, default: Time.now.day
+
+    def get(year = options[:year], day = options[:day])
+      download(year, day)
+    end
+
     desc "download", "downloads an input file for today, or an optionally specified year & day"
     method_option :year, aliases: "-y", type: :numeric, required: false, default: Time.now.year
     method_option :day, aliases: "-d", type: :numeric, required: false, default: Time.now.day
