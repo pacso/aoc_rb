@@ -4,13 +4,16 @@ module AocRb
     include HTTParty
     base_uri 'adventofcode.com'
 
-    def initialize(year, session)
-      @year = year
+    def initialize(session)
       @options = {headers: {'Cookie' => "session=#{session}"}}
     end
 
-    def day(day_number)
-      self.class.get("/#{@year}/day/#{day_number}/input", @options)
+    def puzzle_instructions(year, day)
+      self.class.get("/#{year}/day/#{day}", @options)
+    end
+
+    def puzzle_input(year, day)
+      self.class.get("/#{year}/day/#{day}/input", @options)
     end
   end
 end
