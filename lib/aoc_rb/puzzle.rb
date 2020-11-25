@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "nokogiri"
-require "byebug"
 
 module AocRb
   module Puzzle
@@ -44,7 +43,7 @@ module AocRb
       return unless child.respond_to?(:name)
       case child.name
       when "text"
-        f.write child.content.strip.strip.gsub("\n", "\n" + (" " * indent_level))
+        f.write child.content.chomp.gsub("\n", "\n" + (" " * indent_level))
       when "h2"
         f.write "## "
         process_children f, child.children, indent_level, strip_em

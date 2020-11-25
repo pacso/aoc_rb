@@ -12,12 +12,12 @@ require "aoc_rb/aoc_api"
 
 module AocRb
   class Cli < Thor
-    desc "get", "Downloads the input file and problem statement for today, or an optionally specified year / day"
+    desc "fetch", "Downloads the input file and problem statement for today, or an optionally specified year / day"
     method_option :year, aliases: "-y", type: :numeric, default: Time.now.year
     method_option :day, aliases: "-d", type: :numeric, default: Time.now.day
 
-    def get(year = options[:year], day = options[:day])
-      download(year, day)
+    def fetch(year = options[:year], day = options[:day])
+      fetch_input(year, day)
       fetch_instructions(year, day)
     end
 
@@ -25,7 +25,7 @@ module AocRb
     method_option :year, aliases: "-y", type: :numeric, default: Time.now.year
     method_option :day, aliases: "-d", type: :numeric, default: Time.now.day
 
-    def download(year = options[:year], day = options[:day])
+    def fetch_input(year = options[:year], day = options[:day])
       AocRb::PuzzleInput.download(year, day)
     end
 
