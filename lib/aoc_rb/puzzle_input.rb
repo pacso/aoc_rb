@@ -5,14 +5,14 @@ module AocRb
 
     def load(year, day)
       file_path = puzzle_path(year, day)
-      download(year, day) unless File.exists? file_path
+      download(year, day) unless File.exist? file_path
       File.read(file_path)
     end
 
     def create_required_directories(year, day)
       padded_day = day.to_s.rjust(2, "0")
       year_directory = File.join("challenges", year.to_s, padded_day)
-      FileUtils.mkdir_p(year_directory) unless Dir.exists?(year_directory)
+      FileUtils.mkdir_p(year_directory) unless Dir.exist?(year_directory)
     end
 
     def puzzle_path(year, day)

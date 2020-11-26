@@ -42,7 +42,7 @@ module AocRb
     method_option :day, aliases: "-d", type: :numeric, default: Time.now.day
 
     def bootstrap(year = options[:year], day = options[:day])
-      puts "Set up boilerplate for #{year}, Day #{day}"
+      AocRb::Puzzle.create_templates(year, day)
     end
   end
 end
