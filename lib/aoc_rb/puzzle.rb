@@ -53,6 +53,10 @@ module AocRb
       parse_and_save_instructions(year, day, content)
     end
 
+    def create_puzzle(year, day)
+
+    end
+
     def create_required_directories(year, day)
       year_directory = File.join("challenges", year.to_s, padded(day))
       FileUtils.mkdir_p(year_directory) unless Dir.exist?(year_directory)
