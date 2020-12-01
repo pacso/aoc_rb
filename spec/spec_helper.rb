@@ -1,5 +1,11 @@
 require "bundler/setup"
-require "aoc_rb"
+
+require "httparty"
+require 'dotenv/load'
+require "thor"
+
+lib_path = File.join(File.dirname(__FILE__), "..", "lib", "aoc_rb", "*.rb")
+Dir[lib_path].each { |file| require file }
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

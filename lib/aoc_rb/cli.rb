@@ -3,9 +3,7 @@
 # require "aoc_rb/app_loader"
 # AocRb::AppLoader.exec_app
 
-require "httparty"
-require 'dotenv/load'
-require "thor"
+
 
 lib_files = File.join(File.dirname(__FILE__), "*.rb")
 src_files = File.join("challenges", "**", "*.rb")
@@ -60,7 +58,7 @@ module AocRb
       AocRb::Puzzle.create_templates(year, day)
     end
 
-    desc "run", "executes the puzzle for today, or the specified date"
+    desc "exec", "executes the puzzle for today, or the specified date"
     method_option :year, aliases: "-y", type: :numeric, default: Time.now.year
     method_option :day, aliases: "-d", type: :numeric, default: Time.now.day
 
@@ -91,5 +89,3 @@ module AocRb
     end
   end
 end
-
-AocRb::Cli.start
