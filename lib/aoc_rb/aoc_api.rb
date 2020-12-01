@@ -1,10 +1,9 @@
 # frozen_string_literal: true
-require 'byebug'
+
 module AocRb
   class AocApi
     include HTTParty
     base_uri 'https://adventofcode.com'
-    # base_uri 'lvh.me:3000'
 
     def initialize(session)
       @options = { headers: { 'Cookie' => "session=#{session}" }, follow_redirects: false }

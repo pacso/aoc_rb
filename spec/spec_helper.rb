@@ -4,6 +4,9 @@ require "httparty"
 require 'dotenv/load'
 require "thor"
 
+require 'webmock/rspec'
+WebMock.disable_net_connect!
+
 lib_path = File.join(File.dirname(__FILE__), "..", "lib", "aoc_rb", "*.rb")
 Dir[lib_path].each { |file| require file }
 
@@ -16,5 +19,9 @@ RSpec.configure do |config|
 
   config.expect_with :rspec do |c|
     c.syntax = :expect
+  end
+
+  config.after(:each) do
+    FileUtils.rm_rf(File.join(File.dirname(__FILE__), "..", "challenges"))
   end
 end
