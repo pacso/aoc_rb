@@ -66,11 +66,28 @@ module AocRb
 
     def exec(year = options[:year], day = options[:day])
       puzzle = AocRb::PuzzleSource.create_puzzle(year, day)
+      input  = AocRb::PuzzleInput.load(year, day)
 
-      input = AocRb::PuzzleInput.load(year, day)
       AocRb::PuzzleSource.run_part('part 1') { puzzle.part_1(input) }
       puts
       AocRb::PuzzleSource.run_part('part 2') { puzzle.part_2(input) }
+    end
+
+    desc "sub", "submits the puzzle solution for today, or the specified date"
+    method_option :year, aliases: "-y", type: :numeric, default: Time.now.year
+    method_option :day, aliases: "-d", type: :numeric, default: Time.now.day
+    method_option :part, aliases: "-p", type: :numeric, default: 1
+
+    def sub(part = options[:part], year = options[:year], day = options[:day])
+      if PuzzleSolution.submit(part, year, day)
+        puts "Correct!"
+        if part == 1
+          puts "Fetching part 2"
+          fetch_instructions(year, day)
+        end
+      else
+        puts "Incorrect answer"
+      end
     end
   end
 end
