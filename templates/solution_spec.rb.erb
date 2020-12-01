@@ -2,13 +2,31 @@
 require 'spec_helper'
 
 RSpec.describe Year<%= @year %>::Day<%= @day %> do
-  it "solves part1" do
-    d = Year<%= @year %>::Day<%= @day %>.new
-    expect(d.part_1('some_input')).to eq('expected_result')
+  let(:puzzle) { Year<%= @year %>::Day<%= @day %>.new }
+
+  describe "part 1" do
+    let(:example_input) {
+      <<~EOF
+        change
+        me
+      EOF
+    }
+
+    it "returns X for the example input" do
+      expect(puzzle.part_1(example_input)).to eq("X")
+    end
   end
 
-  it "solves part2" do
-    d = Year<%= @year %>::Day<%= @day %>.new
-    expect(d.part_2('some_input')).to eq(nil)
+  describe "part 2" do
+    let(:example_input) {
+      <<~EOF
+        change
+        me
+      EOF
+    }
+
+    it "returns X for the example input" do
+      expect(puzzle.part_2(example_input)).to eq("X")
+    end
   end
 end
