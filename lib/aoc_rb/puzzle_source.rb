@@ -15,18 +15,19 @@ module AocRb
     end
 
     def run_part(part_name)
-      has_result = false
+      solution = nil
       t = Benchmark.realtime do
         solution = yield
         if !solution.nil?
           puts "Result for #{part_name}:"
           puts solution
-          has_result = true
         else
           puts "no result for #{part_name}"
         end
       end
-      puts "(obtained in #{t} seconds)" if has_result
+      puts "(obtained in #{t} seconds)" unless solution.nil?
+
+      solution
     end
   end
 end

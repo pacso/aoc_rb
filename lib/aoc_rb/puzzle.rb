@@ -57,6 +57,11 @@ module AocRb
 
     end
 
+    def instructions_exist?(year, day, part)
+      filename = File.join("challenges", year.to_s, padded(day), "#{part}.md")
+      File.exist?(filename)
+    end
+
     def create_required_directories(year, day)
       year_directory = File.join("challenges", year.to_s, padded(day))
       FileUtils.mkdir_p(year_directory) unless Dir.exist?(year_directory)

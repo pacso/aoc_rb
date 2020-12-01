@@ -4,7 +4,6 @@
 # AocRb::AppLoader.exec_app
 
 
-
 lib_files = File.join(File.dirname(__FILE__), "*.rb")
 src_files = File.join("challenges", "**", "*.rb")
 Dir[lib_files].each do |file|
@@ -64,11 +63,44 @@ module AocRb
 
     def exec(year = options[:year], day = options[:day])
       puzzle = AocRb::PuzzleSource.create_puzzle(year, day)
-      input  = AocRb::PuzzleInput.load(year, day)
+      input = AocRb::PuzzleInput.load(year, day)
 
-      AocRb::PuzzleSource.run_part('part 1') { puzzle.part_1(input) }
-      puts
-      AocRb::PuzzleSource.run_part('part 2') { puzzle.part_2(input) }
+      level = Puzzle.instructions_exist?(year, day, :part_2) ? 2 : 1
+      puts "#{year} Day #{day}"
+      solution = PuzzleSource.run_part("part #{level}") { puzzle.send("part_#{level}", input) }
+
+      puts "Submit solution? #{solution} (y/N)"
+      submit = STDIN.gets.chomp.downcase
+      puts "We said #{submit}"
+
+      if submit == "y"
+        if PuzzleSolution.submit(level, year, day, solution)
+          puts "Correct!"
+
+          if level == 1
+            puts "Downloading part 2!"
+            fetch_instructions(year, day)
+          end
+        end
+      end
+
+      # If file exists for part_2 instructions, exec part 2 of puzzle
+      # else exec part 1 of puzzle
+      #
+      # Display puzzle output
+      # Prompt for submission
+      #
+      # if yes, submit answer for correct level/part
+      # output success/failure of submission
+      #
+      # if successful, and part 1, download instructions for part 2 & say so
+      # else say well done
+
+      # solution = AocRb::PuzzleSource.run_part('part 1') { puzzle.part_1(input) }
+      # puts "Submit solution? #{solution} (y/N)"
+      # submit = STDIN.gets.chomp.downcase
+      # puts "We said #{submit}"
+      # AocRb::PuzzleSource.run_part('part 2') { puzzle.part_2(input) }
     end
 
     desc "sub", "submits the puzzle solution for today, or the specified date"
