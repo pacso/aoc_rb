@@ -3,20 +3,20 @@
 require 'spec_helper'
 
 RSpec.describe AocRb::Cli do
-  let(:time) { Time.now }
-  let(:year) { time.year }
-  let(:day) { time.day }
-  let(:puzzle_input) {
-    <<~EOF
-      Some
-      collection
-      of
-      input
-      data
-    EOF
-  }
+  let(:year) { Time.now.year }
+  let(:day) { Time.now.day }
 
   describe "fetch_input" do
+    let(:puzzle_input) {
+      <<~EOF
+        Some
+        collection
+        of
+        input
+        data
+      EOF
+    }
+
     before do
       stub_request(:get, "https://adventofcode.com/#{year}/day/#{day}/input").to_return({body: puzzle_input})
       stub_request(:get, "https://adventofcode.com/2018/day/4/input").to_return({body: puzzle_input})
