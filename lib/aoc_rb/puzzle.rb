@@ -50,7 +50,7 @@ module AocRb
       api = AocRb::AocApi.new(ENV['AOC_COOKIE'])
       content = api.puzzle_instructions(year, day)
 
-      parse_and_save_instructions(year, day, content)
+      parse_and_save_instructions(year, day, content.body)
     end
 
     def create_puzzle(year, day)
