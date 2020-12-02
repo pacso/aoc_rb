@@ -18,9 +18,9 @@ module AocRb
       wrong = /not the right answer/.match?(response.body)
       already_complete = /Did you already complete it/.match?(response.body)
 
-      doc = Nokogiri::HTML(response.body)
-      articles = doc.css("article")
-      puts articles[0].content
+      # doc = Nokogiri::HTML(response.body)
+      # articles = doc.css("article")
+      # puts articles[0].content
 
       puts "That's not the right answer" if wrong
       puts "You have already completed this challenge" if already_complete
