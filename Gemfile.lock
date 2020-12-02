@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    aoc_rb (0.1.0)
+    aoc_rb (0.0.0)
       dotenv (~> 2.7.6)
       httparty (~> 0.18.1)
       nokogiri (~> 1.10.10)
