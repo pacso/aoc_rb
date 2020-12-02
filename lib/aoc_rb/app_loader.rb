@@ -14,8 +14,7 @@ module AocRb
         if exe = find_executable
           contents = File.read(exe)
 
-          if /(APP)_PATH/.match?(contents)
-            puts "Starting AocRb App!"
+          if /THIS IS THE BIN FILE/.match?(contents)
             exec RUBY, exe, *ARGV
             break
           end

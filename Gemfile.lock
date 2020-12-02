@@ -2,11 +2,11 @@ PATH
   remote: .
   specs:
     aoc_rb (0.1.0)
-      dotenv
-      httparty
-      nokogiri
+      dotenv (~> 2.7.6)
+      httparty (~> 0.18.1)
+      nokogiri (~> 1.10.10)
       rspec (~> 3.0)
-      thor
+      thor (~> 1.0.1)
 
 GEM
   remote: https://rubygems.org/
@@ -56,7 +56,7 @@ DEPENDENCIES
   aoc_rb!
   byebug
   rake (~> 12.0)
-  webmock
+  webmock (~> 3.10.0)
 
 BUNDLED WITH
    2.1.4
