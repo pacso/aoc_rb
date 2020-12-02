@@ -71,7 +71,6 @@ module AocRb
 
       puts "Submit solution? #{solution} (y/N)"
       submit = STDIN.gets.chomp.downcase
-      puts "We said #{submit}"
 
       if submit == "y"
         if PuzzleSolution.submit(level, year, day, solution)
