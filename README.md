@@ -24,7 +24,7 @@ Before running any commands, you must set up your `AOC_COOKIE` environment varia
     $ cp .env-template .env
 
 You'll need to log in to the [Advent of Code](https://adventofcode.com) website and then grab a copy of your session key from your cookies.
-In Chrome you can do this via [chrome settings](chrome://settings/cookies/detail?site=adventofcode.com). Just click on `session` and copy your key from the `Content` section.
+In Chrome you can do this via [chrome settings](chrome://settings/cookies/detail?site=adventofcode.com) by entering `chrome://settings/cookies/detail?site=adventofcode.com` in your address bar. Just click on `session` and copy your key from the `Content` section.
 
 Now edit the new `.env` file, so that it looks like the following, replacing `ABCDE12345` with the session key you just copied:
 
