@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe AocRb::Cli do
+RSpec.describe AocRb::App do
   let(:year) { Time.now.year }
   let(:day) { Time.now.day }
 
@@ -23,12 +23,12 @@ RSpec.describe AocRb::Cli do
     end
 
     it "sends a GET request to AOC for today's input" do
-      AocRb::Cli.start %w(fetch_input)
+      AocRb::App.start %w(fetch_input)
       expect(WebMock).to have_requested(:get, "https://adventofcode.com/#{year}/day/#{day}/input")
     end
 
     it "can override the current date" do
-      AocRb::Cli.start %w(fetch_input -y 2018 -d 4)
+      AocRb::App.start %w(fetch_input -y 2018 -d 4)
       expect(WebMock).to have_requested(:get, "https://adventofcode.com/2018/day/4/input")
     end
 
@@ -36,7 +36,7 @@ RSpec.describe AocRb::Cli do
       challenge_dir = File.join(File.dirname(__FILE__), "../../..", "challenges", "2018", "04")
       input_file = File.join(challenge_dir, "input.txt")
 
-      expect { AocRb::Cli.start %w(fetch_input -y 2018 -d 4) }.to change { File.exist?(input_file) }.from(false).to(true)
+      expect { AocRb::App.start %w(fetch_input -y 2018 -d 4) }.to change { File.exist?(input_file) }.from(false).to(true)
       expect(File.read(input_file)).to eq puzzle_input
     end
   end
@@ -408,31 +408,28 @@ RSpec.describe AocRb::Cli do
       EOF
     }
 
-    before do
-      stub_request(:get, "https://adventofcode.com/#{year}/day/#{day}").to_return({body: response_part_1})
-      stub_request(:get, "https://adventofcode.com/2018/day/4").to_return({body: response_part_1})
-      stub_request(:get, "https://adventofcode.com/2018/day/1").to_return({body: response_part_2})
-    end
-
     it "sends a GET request to AOC for today's instructions" do
-      AocRb::Cli.start %w(fetch_instructions)
+      stub_request(:get, "https://adventofcode.com/#{year}/day/#{day}").to_return({body: response_part_1})
+      AocRb::App.start %w(fetch_instructions)
       expect(WebMock).to have_requested(:get, "https://adventofcode.com/#{year}/day/#{day}")
     end
 
     it "converts the returned HTML into markdown and saves it to the correct challenge directory" do
+      stub_request(:get, "https://adventofcode.com/2018/day/4").to_return({body: response_part_1})
       challenge_dir = File.join(File.dirname(__FILE__), "../../..", "challenges", "2018", "04")
       part_1_file = File.join(challenge_dir, "part_1.md")
-      expect { AocRb::Cli.start %w(fetch_instructions 2018 4) }.to change { File.exist?(part_1_file) }.from(false).to(true)
-      expect(File.read(part_1_file)).to eq expected_markdown
+      expect { AocRb::App.start %w(fetch_instructions 2018 4) }.to change { File.exist?(part_1_file) }.from(false).to(true)
+      expect(File.read(part_1_file)).to eq markdown_part_1
     end
 
     it "correctly splits the instructions into two files when both parts are returned" do
+      stub_request(:get, "https://adventofcode.com/2018/day/1").to_return({body: response_part_2})
       challenge_dir = File.join(File.dirname(__FILE__), "../../..", "challenges", "2018", "01")
       part_1_file = File.join(challenge_dir, "part_1.md")
       part_2_file = File.join(challenge_dir, "part_2.md")
       expect(File.exist?(part_1_file)).to be false
       expect(File.exist?(part_2_file)).to be false
-      AocRb::Cli.start %w(fetch_instructions 2018 1)
+      AocRb::App.start %w(fetch_instructions 2018 1)
       expect(File.exist?(part_1_file)).to be true
       expect(File.exist?(part_2_file)).to be true
       expect(File.read(part_2_file)).to eq markdown_part_2

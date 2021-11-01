@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module AocRb
   module PuzzleInput
     extend self

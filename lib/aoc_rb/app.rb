@@ -1,5 +1,6 @@
 require "httparty"
 require 'dotenv/load'
+require "fileutils"
 require "thor"
 
 require 'aoc_rb/aoc_api'
