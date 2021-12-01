@@ -22,6 +22,12 @@ module AocRb
       FileUtils.mkdir_p bin_dir
       File.open(bin_path, "w") { |f| f.write(File.read(bin_template)) }
 
+      shared_dir = File.join(project_dir, "challenges", "shared")
+      solution_path = File.join(shared_dir, "solution.rb")
+      solution_template = File.join(File.dirname(__FILE__), "../../templates/solution_base.rb")
+      FileUtils.mkdir_p shared_dir
+      File.open(solution_path, "w") { |f| f.write(File.read(solution_template)) }
+
       spec_dir = File.join(project_dir, "spec")
       spec_helper_path = File.join(spec_dir, "spec_helper.rb")
       spec_helper_template = File.join(File.dirname(__FILE__), "../../templates/spec/spec_helper.rb")

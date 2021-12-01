@@ -5,10 +5,10 @@ module AocRb
   module PuzzleSource
     extend self
 
-    def create_puzzle(year, day)
+    def create_puzzle(year, day, input)
       padded_day = Puzzle.padded(day)
       begin
-        Module.const_get("Year#{year}").const_get("Day#{padded_day}").new
+        Module.const_get("Year#{year}").const_get("Day#{padded_day}").new(input)
       rescue NameError
         puts "There is no solution for this puzzle"
       end

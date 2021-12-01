@@ -9,8 +9,16 @@ require 'aoc_rb/puzzle_input'
 require 'aoc_rb/puzzle_solution'
 require 'aoc_rb/puzzle_source'
 
-src_files = File.join(Dir.getwd, "challenges", "**", "*.rb")
+shared_files = File.join(Dir.getwd, "challenges", "shared", "**", "*.rb")
+Dir[shared_files].each do |file|
+  if File.exist? file
+    require file
+  else
+    puts "missing file #{file}"
+  end
+end
 
+src_files = File.join(Dir.getwd, "challenges", "20**", "**", "*.rb")
 Dir[src_files].each do |file|
   if File.exist? file
     require file
@@ -72,12 +80,12 @@ module AocRb
     method_option :day, aliases: "-d", type: :numeric, default: Time.now.day
 
     def exec(year = options[:year], day = options[:day])
-      puzzle = AocRb::PuzzleSource.create_puzzle(year, day)
       input = AocRb::PuzzleInput.load(year, day)
+      puzzle = AocRb::PuzzleSource.create_puzzle(year, day, input)
 
       level = Puzzle.instructions_exist?(year, day, :part_2) ? 2 : 1
       puts "#{year} Day #{day}"
-      solution = PuzzleSource.run_part("part #{level}") { puzzle.send("part_#{level}", input) }
+      solution = PuzzleSource.run_part("part #{level}") { puzzle.send("part_#{level}") }
 
       puts "Submit solution? #{solution} (y/N)"
       submit = STDIN.gets.chomp.downcase

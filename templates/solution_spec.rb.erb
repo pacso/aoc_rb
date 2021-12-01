@@ -2,7 +2,6 @@
 require 'spec_helper'
 
 RSpec.describe Year<%= @year %>::Day<%= @day %> do
-  let(:puzzle) { Year<%= @year %>::Day<%= @day %>.new }
   let(:input) { File.read(File.join(File.dirname(__FILE__), "../../../challenges/<%= @year %>/<%= @day.to_s.rjust(2, "0") %>/input.txt")) }
   let(:example_input) {
     <<~EOF
@@ -13,21 +12,21 @@ RSpec.describe Year<%= @year %>::Day<%= @day %> do
 
   describe "part 1" do
     it "returns nil for the example input" do
-      expect(puzzle.part_1(example_input)).to eq(nil)
+      expect(described_class.part_1(example_input)).to eq(nil)
     end
 
     it "returns nil for my input" do
-      expect(puzzle.part_1(input)).to eq(nil)
+      expect(described_class.part_1(input)).to eq(nil)
     end
   end
 
   describe "part 2" do
     it "returns nil for the example input" do
-      expect(puzzle.part_2(example_input)).to eq(nil)
+      expect(described_class.part_2(example_input)).to eq(nil)
     end
 
     it "returns nil for my input" do
-      expect(puzzle.part_2(input)).to eq(nil)
+      expect(described_class.part_2(input)).to eq(nil)
     end
   end
 end

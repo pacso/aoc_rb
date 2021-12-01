@@ -6,9 +6,9 @@ module AocRb
 
     def submit(level, year, day, answer = nil, allow_waiting = true)
       if answer.nil?
-        puzzle   = PuzzleSource.create_puzzle(year, day)
         input    = PuzzleInput.load(year, day)
-        answer = level == 1 ? puzzle.part_1(input) : puzzle.part_2(input)
+        puzzle   = PuzzleSource.create_puzzle(year, day, input)
+        answer = level == 1 ? puzzle.part_1 : puzzle.part_2
       end
 
       aoc_api  = AocApi.new(ENV['AOC_COOKIE'])
