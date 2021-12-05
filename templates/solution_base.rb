@@ -1,12 +1,12 @@
 # frozen_string_literal: true %>
 
 class Solution
-  def self.part_1(input)
-    new(input).part_1
+  def self.part_1(*input)
+    new(*input).part_1
   end
 
-  def self.part_2(input)
-    new(input).part_2
+  def self.part_2(*input)
+    new(*input).part_2
   end
 
   def initialize(input)
