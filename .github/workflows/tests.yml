@@ -14,13 +14,22 @@ on:
     branches: [ main ]
 
 jobs:
+  changelog:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - id: read-version
+        run: |
+          echo "::set-output name=VERSION::`cat lib/aoc_rb/version.rb | grep -i version | awk '{ print $3 }' | sed -e 's/\"//g'`"
+      - uses: dangoslen/changelog-enforcer@v2.3.1
+        with:
+          skipLabels: 'skip-changelog'
+          expectedLatestVersion: ${{ steps.read-version.outputs.VERSION }}
   test:
-
     runs-on: ubuntu-latest
     strategy:
       matrix:
         ruby-version: ['2.6', '2.7', '3.0', '3.1']
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up Ruby
