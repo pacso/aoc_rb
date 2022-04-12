@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "fileutils"
 require "aoc_rb/app_loader"
 AocRb::AppLoader.exec_app
 
