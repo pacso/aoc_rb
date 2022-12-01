@@ -108,12 +108,22 @@ module AocRb
     method_option :day, aliases: "-d", type: :numeric, default: Time.now.day
 
     def output(year = options[:year], day = options[:day])
-      puzzle = AocRb::PuzzleSource.create_puzzle(year, day)
       input = AocRb::PuzzleInput.load(year, day)
+      puzzle = AocRb::PuzzleSource.create_puzzle(year, day, input)
 
-      AocRb::PuzzleSource.run_part('part 1') { puzzle.part_1(input) }
+      AocRb::PuzzleSource.run_part('part 1') { puzzle.part_1 }
       puts
-      AocRb::PuzzleSource.run_part('part 2') { puzzle.part_2(input) }
+      AocRb::PuzzleSource.run_part('part 2') { puzzle.part_2 }
+    end
+
+    desc "spec", "runs tests for the given day"
+    method_option :year, aliases: "-y", type: :numeric, default: Time.now.year
+    method_option :day, aliases: "-d", type: :numeric, default: Time.now.day
+
+    def spec(year = options[:year], day = options[:day])
+      spec_dir = File.join("spec", year.to_s, AocRb::Puzzle.padded(day))
+
+      Kernel.exec( "bundle exec rspec #{spec_dir}" )
     end
 
     desc "prep", "preps everything you need for a new puzzle"
