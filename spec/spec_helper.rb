@@ -21,9 +21,19 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 
+  config.before(:all) do
+    system %(aoc new testing)
+    testing_path = File.join(File.dirname(__FILE__), "..", "testing", "**", "*.rb")
+    Dir[testing_path].each { |file| require file }
+  end
+
+  config.after(:all) do
+    FileUtils.rm_rf(File.join(File.dirname(__FILE__), "..", "testing"))
+  end
+
   config.after(:each) do
     FileUtils.rm_rf(File.join(File.dirname(__FILE__), "..", "challenges"))
     FileUtils.rm_rf(File.join(File.dirname(__FILE__), "..", "dummy"))
-
+    FileUtils.rm_rf(File.join(File.dirname(__FILE__), "..", "spec", "2018"))
   end
 end
