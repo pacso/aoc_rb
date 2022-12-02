@@ -5,7 +5,7 @@ module AocRb
   module PuzzleSource
     extend self
 
-    def create_puzzle(year, day, input = nil)
+    def create_puzzle(year, day, input)
       padded_day = Puzzle.padded(day)
       begin
         Module.const_get("Year#{year}").const_get("Day#{padded_day}").new(input)
