@@ -10,6 +10,8 @@ WebMock.disable_net_connect!
 lib_path = File.join(File.dirname(__FILE__), "..", "lib", "aoc_rb", "*.rb")
 Dir[lib_path].each { |file| require file }
 
+Dir[File.join(File.dirname(__FILE__), "support", "**", "*.rb")].each { |f| require f }
+
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = ".rspec_status"
@@ -21,19 +23,14 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 
-  config.before(:all) do
-    system %(aoc new testing)
-    testing_path = File.join(File.dirname(__FILE__), "..", "testing", "**", "*.rb")
-    Dir[testing_path].each { |file| require file }
-  end
+  config.include SpecMacros
 
-  config.after(:all) do
-    FileUtils.rm_rf(File.join(File.dirname(__FILE__), "..", "testing"))
-  end
+  config.before(:all) { load_test_app }
+  config.after(:all) { remove_test_app }
 
   config.after(:each) do
-    FileUtils.rm_rf(File.join(File.dirname(__FILE__), "..", "testing", "challenges"))
-    FileUtils.rm_rf(File.join(File.dirname(__FILE__), "..", "challenges"))
-    FileUtils.rm_rf(File.join(File.dirname(__FILE__), "..", "spec", "2018"))
+    # FileUtils.rm_rf(File.join(File.dirname(__FILE__), "..", "testing", "challenges"))
+    # FileUtils.rm_rf(File.join(File.dirname(__FILE__), "..", "challenges"))
+    # FileUtils.rm_rf(File.join(File.dirname(__FILE__), "..", "spec", "2018"))
   end
 end
