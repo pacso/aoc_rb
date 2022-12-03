@@ -26,6 +26,7 @@ RSpec.configure do |config|
   config.include SpecMacros
 
   config.before(:all) { load_test_app }
+  config.after(:each) { clean_test_app }
   config.after(:all) { remove_test_app }
 
   config.after(:each) do
