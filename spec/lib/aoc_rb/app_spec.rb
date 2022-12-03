@@ -442,13 +442,8 @@ RSpec.describe AocRb::App do
     end
 
     it "can return output" do
-      year = 2018
-      day = 4
       AocRb::App.start %w(bootstrap -y 2018 -d 4)
-
-      challenge_dir = File.join(File.dirname(__FILE__), "../../..", "challenges", "#{year}", "#{day.to_s.rjust(2, "0")}")
-      solution_for_day = File.join(challenge_dir, "solution.rb")
-      require solution_for_day
+      require File.join(File.join(File.dirname(__FILE__), "../../..", "challenges", "2018", "04"), "solution.rb")
 
       expect { AocRb::App.start %w(output -y 2018 -d 4) }.to output("no result for part 1\n\nno result for part 2\n").to_stdout
     end
