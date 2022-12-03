@@ -12,3 +12,10 @@
 .rspec_status
 /.idea/
 
+# environment files
+.ruby-gemset
+.ruby-version
+
+# gem build files
+*.gem
+
