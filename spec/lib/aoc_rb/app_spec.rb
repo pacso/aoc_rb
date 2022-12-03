@@ -18,26 +18,31 @@ RSpec.describe AocRb::App do
     }
 
     before do
-      stub_request(:get, "https://adventofcode.com/#{year}/day/#{day}/input").to_return({body: puzzle_input})
-      stub_request(:get, "https://adventofcode.com/2018/day/4/input").to_return({body: puzzle_input})
+      stub_request(:get, "https://adventofcode.com/#{year}/day/#{day}/input").to_return({ body: puzzle_input })
+      stub_request(:get, "https://adventofcode.com/2018/day/4/input").to_return({ body: puzzle_input })
     end
 
     it "sends a GET request to AOC for today's input" do
-      AocRb::App.start %w(fetch_input)
-      expect(WebMock).to have_requested(:get, "https://adventofcode.com/#{year}/day/#{day}/input")
+      within_test_app do
+        AocRb::App.start %w(fetch_input)
+        expect(WebMock).to have_requested(:get, "https://adventofcode.com/#{year}/day/#{day}/input")
+      end
     end
 
     it "can override the current date" do
-      AocRb::App.start %w(fetch_input -y 2018 -d 4)
-      expect(WebMock).to have_requested(:get, "https://adventofcode.com/2018/day/4/input")
+      within_test_app do
+        AocRb::App.start %w(fetch_input -y 2018 -d 4)
+        expect(WebMock).to have_requested(:get, "https://adventofcode.com/2018/day/4/input")
+      end
     end
 
     it "saves the downloaded input into the correct challenge directory" do
-      challenge_dir = File.join(File.dirname(__FILE__), "../../..", "challenges", "2018", "04")
-      input_file = File.join(challenge_dir, "input.txt")
+      input_file = test_file_path("challenges", "2018", "04", "input.txt")
 
-      expect { AocRb::App.start %w(fetch_input -y 2018 -d 4) }.to change { File.exist?(input_file) }.from(false).to(true)
-      expect(File.read(input_file)).to eq puzzle_input
+      within_test_app do
+        expect { AocRb::App.start %w(fetch_input -y 2018 -d 4) }.to change { File.exist?(input_file) }.from(false).to(true)
+        expect(File.read(input_file)).to eq puzzle_input
+      end
     end
   end
 
@@ -409,27 +414,28 @@ RSpec.describe AocRb::App do
     }
 
     it "sends a GET request to AOC for today's instructions" do
-      stub_request(:get, "https://adventofcode.com/#{year}/day/#{day}").to_return({body: response_part_1})
-      AocRb::App.start %w(fetch_instructions)
+      stub_request(:get, "https://adventofcode.com/#{year}/day/#{day}").to_return({ body: response_part_1 })
+      within_test_app { AocRb::App.start %w(fetch_instructions) }
       expect(WebMock).to have_requested(:get, "https://adventofcode.com/#{year}/day/#{day}")
     end
 
     it "converts the returned HTML into markdown and saves it to the correct challenge directory" do
-      stub_request(:get, "https://adventofcode.com/2018/day/4").to_return({body: response_part_1})
-      challenge_dir = File.join(File.dirname(__FILE__), "../../..", "challenges", "2018", "04")
-      part_1_file = File.join(challenge_dir, "part_1.md")
-      expect { AocRb::App.start %w(fetch_instructions 2018 4) }.to change { File.exist?(part_1_file) }.from(false).to(true)
-      expect(File.read(part_1_file)).to eq markdown_part_1
+      stub_request(:get, "https://adventofcode.com/2018/day/4").to_return({ body: response_part_1 })
+      part_1_file = test_file_path("challenges/2018/04/part_1.md")
+      within_test_app do
+        expect { AocRb::App.start %w(fetch_instructions 2018 4) }.to change { File.exist?(part_1_file) }.from(false).to(true)
+        expect(File.read(part_1_file)).to eq markdown_part_1
+      end
     end
 
     it "correctly splits the instructions into two files when both parts are returned" do
-      stub_request(:get, "https://adventofcode.com/2018/day/1").to_return({body: response_part_2})
-      challenge_dir = File.join(File.dirname(__FILE__), "../../..", "challenges", "2018", "01")
-      part_1_file = File.join(challenge_dir, "part_1.md")
-      part_2_file = File.join(challenge_dir, "part_2.md")
+      stub_request(:get, "https://adventofcode.com/2018/day/1").to_return({ body: response_part_2 })
+      challenge_dir = test_file_path("challenges/2018/01")
+      part_1_file   = File.join(challenge_dir, "part_1.md")
+      part_2_file   = File.join(challenge_dir, "part_2.md")
       expect(File.exist?(part_1_file)).to be false
       expect(File.exist?(part_2_file)).to be false
-      AocRb::App.start %w(fetch_instructions 2018 1)
+      within_test_app { AocRb::App.start %w(fetch_instructions 2018 1) }
       expect(File.exist?(part_1_file)).to be true
       expect(File.exist?(part_2_file)).to be true
       expect(File.read(part_2_file)).to eq markdown_part_2
@@ -438,15 +444,11 @@ RSpec.describe AocRb::App do
 
   describe "output" do
     before do
-      stub_request(:get, "https://adventofcode.com/2018/day/4/input").to_return({body: 'test'})
-    end
-
-    after do
-      FileUtils.rm_rf(File.join(Dir.pwd, "testing", "spec", "2018"))
+      stub_request(:get, "https://adventofcode.com/2018/day/4/input").to_return({ body: 'test' })
     end
 
     it "can return output" do
-      Dir.chdir("testing") do
+      within_test_app do
         AocRb::App.start %w(bootstrap -y 2018 -d 4)
         require File.join(Dir.pwd, "challenges", "2018", "04", "solution.rb")
 
