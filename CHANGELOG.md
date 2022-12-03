@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Updated gitignore to exclude ruby environment and gem build files
+- Updated all specs to use the generated test app folder, rather than the gem root dir ([#21](https://github.com/pacso/aoc_rb/pull/21) by [@pacso](https://github.com/pacso))
 
 ### Fixed
 - Thor exit_on_failure deprecation warning (by [@kauredo](https://github.com/kauredo))
