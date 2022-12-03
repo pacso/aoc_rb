@@ -1,7 +1,7 @@
 # AocRb
 
-[![Tests](https://github.com/pacso/aoc_rb/actions/workflows/tests.yml/badge.svg)](https://github.com/pacso/aoc_rb/actions/workflows/tests.yml)
 [![Gem Version](https://badge.fury.io/rb/aoc_rb.svg)](https://badge.fury.io/rb/aoc_rb)
+[![Tests](https://github.com/pacso/aoc_rb/actions/workflows/tests.yml/badge.svg)](https://github.com/pacso/aoc_rb/actions/workflows/tests.yml)
 
 This gem provides a simple way to create a project for solving [Advent of Code](https://adventofcode.com) puzzles.
 
