@@ -8,6 +8,10 @@ require "thor"
 
 module AocRb
   class Cli < Thor
+    def self.exit_on_failure?
+      false
+    end
+
     desc "new NAME", "Creates a new AoC project with the given name"
 
     def new(name)

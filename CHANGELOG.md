@@ -5,8 +5,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- New spec --all task to run all tests (by [@kauredo](https://github.com/kauredo))
+- Tests for output task (by [@kauredo](https://github.com/kauredo))
+
 ### Changed
 - Updated gitignore to exclude ruby environment and gem build files
+
+### Fixed
+- Thor exit_on_failure deprecation warning (by [@kauredo](https://github.com/kauredo))
 
 ## [0.2.4]
 ### Fixed

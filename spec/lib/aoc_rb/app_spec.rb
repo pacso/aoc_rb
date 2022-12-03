@@ -435,4 +435,23 @@ RSpec.describe AocRb::App do
       expect(File.read(part_2_file)).to eq markdown_part_2
     end
   end
+
+  describe "output" do
+    before do
+      stub_request(:get, "https://adventofcode.com/2018/day/4/input").to_return({body: 'test'})
+    end
+
+    after do
+      FileUtils.rm_rf(File.join(Dir.pwd, "testing", "spec", "2018"))
+    end
+
+    it "can return output" do
+      Dir.chdir("testing") do
+        AocRb::App.start %w(bootstrap -y 2018 -d 4)
+        require File.join(Dir.pwd, "challenges", "2018", "04", "solution.rb")
+
+        expect { AocRb::App.start %w(output -y 2018 -d 4) }.to output("no result for part 1\n\nno result for part 2\n").to_stdout
+      end
+    end
+  end
 end
