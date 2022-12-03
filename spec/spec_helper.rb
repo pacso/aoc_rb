@@ -34,7 +34,6 @@ RSpec.configure do |config|
   config.after(:each) do
     FileUtils.rm_rf(File.join(File.dirname(__FILE__), "..", "testing", "challenges"))
     FileUtils.rm_rf(File.join(File.dirname(__FILE__), "..", "challenges"))
-    FileUtils.rm_rf(File.join(File.dirname(__FILE__), "..", "dummy"))
     FileUtils.rm_rf(File.join(File.dirname(__FILE__), "..", "spec", "2018"))
   end
 end
