@@ -447,10 +447,6 @@ RSpec.describe AocRb::App do
       stub_request(:get, "https://adventofcode.com/2018/day/4/input").to_return({ body: 'test' })
     end
 
-    after do
-      remove_test_dir("spec", "2018")
-    end
-
     it "can return output" do
       within_test_app do
         AocRb::App.start %w(bootstrap -y 2018 -d 4)
