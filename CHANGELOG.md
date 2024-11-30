@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - No unreleased changes!
 
+## [0.2.6]
+### Changed
+- Updated minimum gem versions for dependencies ([#26](https://github.com/pacso/aoc_rb/pull/26) by [@pacso](https://github.com/pacso))
+
 ## [0.2.5]
 ### Added
 - New spec --all task to run all tests (by [@kauredo](https://github.com/kauredo))
