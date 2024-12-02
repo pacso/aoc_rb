@@ -144,5 +144,3 @@ module AocRb
     end
   end
 end
-
-AocRb::App.start

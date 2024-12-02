@@ -33,3 +33,5 @@ require "bundler/setup"
 # load Gem.bin_path("aoc_rb", "aoc")
 
 require 'aoc_rb/app'
+
+AocRb::App.start

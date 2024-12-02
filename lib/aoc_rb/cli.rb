@@ -49,5 +49,3 @@ module AocRb
     end
   end
 end
-
-AocRb::Cli.start
