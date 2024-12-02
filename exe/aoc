@@ -2,3 +2,5 @@
 # frozen_string_literal: true
 
 require "aoc_rb/cli"
+
+AocRb::Cli.start
