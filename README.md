@@ -7,6 +7,8 @@ This gem provides a simple way to create a project for solving [Advent of Code](
 
 It also provides some handy tools to automate your interactions with the Advent of Code website.
 
+If you want more help with your puzzles (use with care ... it'll take the fun out of doing it yourself) then take a look at [aoc_rb_helpers](https://github.com/pacso/aoc_rb_helpers).
+
 ## Getting Started
 
 First of all, install the gem:
