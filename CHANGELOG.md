@@ -5,7 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-- No unreleased changes!
+### Added
+- Version command, which outputs the installed version of the gem ([#30](https://github.com/pacso/aoc_rb/pull/30) by [@pacso](https://github.com/pacso))
 
 ## [0.2.6]
 ### Changed
