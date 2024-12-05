@@ -142,5 +142,11 @@ module AocRb
       fetch(year, day)
       bootstrap(year, day)
     end
+
+    desc "version", "prints the current installed version of AocRb"
+
+    def version
+      puts "AocRb version #{AocRb::VERSION}"
+    end
   end
 end
