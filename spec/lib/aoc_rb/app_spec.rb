@@ -456,4 +456,12 @@ RSpec.describe AocRb::App do
       end
     end
   end
+
+  describe "version" do
+    it "returns the current version" do
+      within_test_app do
+        expect { AocRb::App.start %w(version) }.to output("AocRb version #{AocRb::VERSION}\n").to_stdout
+      end
+    end
+  end
 end
