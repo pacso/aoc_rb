@@ -37,9 +37,28 @@ Now edit the new `.env` file, so that it looks like the following, replacing `AB
 
 You're now able to run all the `aoc` commands provided by this gem.
     
-You'll see you have a few options when running the `aoc` command within your project.
+You'll see you have a few options when running the `aoc` command within your project. Running `aoc help` will show you all of your options:
 
-`prep` will set everything up for a new daily puzzle. It defaults to the puzzle for today, but you can work with older puzzles by passing the year and day: 
+    $ aoc help
+    Commands:
+      aoc exec            # executes and optionally submits the puzzle for today, or the specified date
+      aoc help [COMMAND]  # Describe available commands or one specific command
+      aoc output          # outputs results from your solution for the given day
+      aoc prep            # preps everything you need for a new puzzle
+      aoc spec            # runs tests for today, or the specified date
+      aoc version         # prints the current installed version of AocRb
+
+If you want to see you options for a given command:
+
+    $ aoc help prep
+    Usage:
+      aoc prep
+    
+    Options:
+      -y, [--year=N]  
+      -d, [--day=N]   
+
+Running `aoc prep` will set everything up for a new daily puzzle. It defaults to the puzzle for today, but you can work with older puzzles by passing the year and day: 
 
     $ aoc prep 2017 12
 
