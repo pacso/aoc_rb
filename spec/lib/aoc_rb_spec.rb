@@ -4,6 +4,6 @@ require 'spec_helper'
 
 RSpec.describe AocRb do
   it "has the expected version number" do
-    expect(AocRb::VERSION).to eq "0.2.7"
+    expect(AocRb::VERSION).to eq "0.2.8"
   end
 end
