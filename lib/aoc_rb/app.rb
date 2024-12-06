@@ -35,13 +35,11 @@ def ensure_aoc_start_in_bin
     exit 1
   end
 
-  content = File.read(bin_path)
-
-  unless content.include?('AocRb::App.start')
+  unless File.read(bin_path).include?('AocRb::App.start')
     puts "Adding missing `AocRb::App.start` line to `bin/aoc`..."
 
     File.open(bin_path, 'a') do |file|
-      file.puts "\nAocRb::App.start"
+      file.puts "\nAocRb::App.start\n"
     end
 
     puts "`AocRb::App.start` has been added to `bin/aoc`.\n\nPlease re-run your aoc command."
