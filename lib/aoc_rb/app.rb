@@ -8,6 +8,7 @@ require 'aoc_rb/puzzle'
 require 'aoc_rb/puzzle_input'
 require 'aoc_rb/puzzle_solution'
 require 'aoc_rb/puzzle_source'
+require 'aoc_rb/version'
 
 shared_files = File.join(Dir.getwd, "challenges", "shared", "**", "*.rb")
 Dir[shared_files].each do |file|

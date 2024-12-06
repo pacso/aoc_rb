@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - No unreleased changes!
 
+## [0.2.9]
+### Changed
+- Added missing require to `lib/aoc_rb/app.rb` ([#33](https://github.com/pacso/aoc_rb/pull/33) by [@pacso](https://github.com/pacso))
+
 ## [0.2.8]
 ### Changed
 - Updated the aoc command to self-heal the `bin/aoc` stub with the expected `AocRb::App.start` command ([#32](https://github.com/pacso/aoc_rb/pull/32) by [@pacso](https://github.com/pacso))
@@ -70,7 +74,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial release.
 
-[Unreleased]: https://github.com/pacso/aoc_rb/compare/v0.2.8...HEAD
+[Unreleased]: https://github.com/pacso/aoc_rb/compare/v0.2.9...HEAD
+[0.2.9]: https://github.com/pacso/aoc_rb/compare/v0.2.8...v0.2.9
 [0.2.8]: https://github.com/pacso/aoc_rb/compare/v0.2.7...v0.2.8
 [0.2.7]: https://github.com/pacso/aoc_rb/compare/v0.2.6...v0.2.7
 [0.2.6]: https://github.com/pacso/aoc_rb/compare/v0.2.5...v0.2.6
