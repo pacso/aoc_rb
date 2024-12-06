@@ -30,7 +30,6 @@ end
 def ensure_aoc_start_in_bin
   bin_path = File.join(Dir.pwd, 'bin/aoc')
 
-  # Ensure the file exists
   unless File.exist?(bin_path)
     puts "Error: The `bin/aoc` file does not exist."
     exit 1
@@ -38,11 +37,9 @@ def ensure_aoc_start_in_bin
 
   content = File.read(bin_path)
 
-  # Check if the required line exists
   unless content.include?('AocRb::App.start')
     puts "Adding missing `AocRb::App.start` line to `bin/aoc`..."
 
-    # Append the missing line to the end of the file
     File.open(bin_path, 'a') do |file|
       file.puts "\nAocRb::App.start"
     end
