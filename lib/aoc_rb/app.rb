@@ -27,6 +27,24 @@ Dir[src_files].each do |file|
   end
 end
 
+def ensure_aoc_start_in_bin
+  bin_path = File.join(Dir.pwd, 'bin/aoc')
+
+  return unless File.exist?(bin_path)
+
+  unless File.read(bin_path).include?('AocRb::App.start')
+    puts "Adding missing `AocRb::App.start` line to `bin/aoc`..."
+
+    File.open(bin_path, 'a') do |file|
+      file.puts "\nAocRb::App.start\n"
+    end
+
+    puts "`AocRb::App.start` has been added to `bin/aoc`.\n\nPlease re-run your aoc command."
+  end
+end
+
+ensure_aoc_start_in_bin
+
 module AocRb
   class App < Thor
     def self.exit_on_failure?
