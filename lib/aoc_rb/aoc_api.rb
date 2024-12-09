@@ -24,7 +24,7 @@ module AocRb
 
     private
       def puzzle_path(year, day)
-        "/#{year}/day/#{day}"
+        "/#{year}/day/#{day.to_i}"
       end
 
       def input_path(year, day)
