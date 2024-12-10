@@ -13,7 +13,7 @@ RSpec.describe AocRb::AocApi do
 
     it "requests the correct path for puzzle instructions with day #{day_input}" do
 
-      expected_path = "/#{year}/day/#{expected_day}"
+      expected_path = "/2024/day/1"
       
       allow(api.class).to receive(:get).and_return(double('Response', body: ''))
       
@@ -24,7 +24,7 @@ RSpec.describe AocRb::AocApi do
     end
 
     it "requests the correct path for puzzle input with day #{day_input}" do
-      expected_path = "/#{year}/day/#{expected_day}/input"
+      expected_path = "/2024/day/1/input"
 
       allow(api.class).to receive(:get).and_return(double('Response', body: ''))
 
@@ -35,7 +35,7 @@ RSpec.describe AocRb::AocApi do
     end
 
     it "posts to the correct path for submit_answer with day #{day_input}" do
-      expected_path = "/#{year}/day/#{expected_day}/answer"
+      expected_path = "/2024/day/1/answer"
       expected_body = { level: level.to_s, answer: answer.to_s }
 
       allow(api.class).to receive(:post).and_return(double('Response', body: ''))
