@@ -11,49 +11,58 @@ RSpec.describe AocRb::AocApi do
   shared_examples "consistent day path" do |day_input, expected_day|
     let(:expected_headers) { { 'Cookie' => "session=#{session_token}" } }
 
-    it "requests the correct path for puzzle instructions with day #{day_input}" do
+    describe "#puzzle_instructions" do
+      let(:expected_path) { "/2024/day/#{expected_day}" }
 
-      expected_path = "/2024/day/1"
-      
-      allow(api.class).to receive(:get).and_return(double('Response', body: ''))
-      
+      before do
+        allow(api.class).to receive(:get).and_return(double('Response', body: ''))
+      end
 
-      api.puzzle_instructions(year, day_input)
-      
-      expect(api.class).to have_received(:get).with(expected_path, hash_including(headers: expected_headers))
+      it "sends the request to the correct uri" do
+        api.puzzle_instructions(year, day_input)
+        expect(api.class).to have_received(:get).with(expected_path, hash_including(headers: expected_headers))
+      end
     end
 
-    it "requests the correct path for puzzle input with day #{day_input}" do
-      expected_path = "/2024/day/1/input"
+    describe "#puzzle_input" do
+      let(:expected_path) { "/2024/day/#{expected_day}/input" }
 
-      allow(api.class).to receive(:get).and_return(double('Response', body: ''))
+      before do
+        allow(api.class).to receive(:get).and_return(double('Response', body: ''))
+      end
 
-      api.puzzle_input(year, day_input)
-
-
-      expect(api.class).to have_received(:get).with(expected_path, hash_including(headers: expected_headers))
+      it "sends the request to the correct uri" do
+        api.puzzle_input(year, day_input)
+        expect(api.class).to have_received(:get).with(expected_path, hash_including(headers: expected_headers))
+      end
     end
 
-    it "posts to the correct path for submit_answer with day #{day_input}" do
-      expected_path = "/2024/day/1/answer"
-      expected_body = { level: level.to_s, answer: answer.to_s }
+    describe "#submit_answer" do
+      let(:expected_path) { "/2024/day/#{expected_day}/answer" }
+      let(:expected_body) { { level: level.to_s, answer: answer.to_s } }
 
-      allow(api.class).to receive(:post).and_return(double('Response', body: ''))
+      before do
+        allow(api.class).to receive(:post).and_return(double('Response', body: ''))
+      end
 
-      api.submit_answer(year, day_input, level, answer)
-
-
-      expect(api.class).to have_received(:post).with(expected_path, hash_including(headers: expected_headers, body: expected_body))
+      it "sends the request to the correct uri" do
+        api.submit_answer(year, day_input, level, answer)
+        expect(api.class).to have_received(:post).with(expected_path, hash_including(headers: expected_headers, body: expected_body))
+      end
     end
-
   end
 
-
-  context "when day is an integer (e.g., 1)" do
+  context "when day is an integer" do
     include_examples "consistent day path", 1, 1
+    include_examples "consistent day path", 17, 17
   end
 
-  context "when day is a string with leading zero (e.g., '01')" do
+  context "when day is a two-character string" do
     include_examples "consistent day path", "01", 1
+    include_examples "consistent day path", "22", 22
+  end
+
+  context "when day is a single character string" do
+    include_examples "consistent day path", "8", 8
   end
 end
