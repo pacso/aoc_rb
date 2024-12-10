@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - No unreleased changes!
 
+## [0.2.10]
+### Changed
+- Update API handler to accept zero padded day numbers  ([#34](https://github.com/pacso/aoc_rb/pull/34) by [@YozuChris](https://github.com/YozuChris))
+
 ## [0.2.9]
 ### Changed
 - Added missing require to `lib/aoc_rb/app.rb` ([#33](https://github.com/pacso/aoc_rb/pull/33) by [@pacso](https://github.com/pacso))
@@ -74,7 +78,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial release.
 
-[Unreleased]: https://github.com/pacso/aoc_rb/compare/v0.2.9...HEAD
+[Unreleased]: https://github.com/pacso/aoc_rb/compare/v0.2.10...HEAD
+[0.2.10]: https://github.com/pacso/aoc_rb/compare/v0.2.9...v0.2.10
 [0.2.9]: https://github.com/pacso/aoc_rb/compare/v0.2.8...v0.2.9
 [0.2.8]: https://github.com/pacso/aoc_rb/compare/v0.2.7...v0.2.8
 [0.2.7]: https://github.com/pacso/aoc_rb/compare/v0.2.6...v0.2.7
